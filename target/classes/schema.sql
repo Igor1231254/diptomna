@@ -1,0 +1,36 @@
+-- This file is commented out to avoid issues with Spring Boot's auto-configuration
+-- CREATE DATABASE IF NOT EXISTS carpooling;
+-- 
+-- USE carpooling;
+-- 
+-- CREATE TABLE IF NOT EXISTS users (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(255) NOT NULL,
+--     email VARCHAR(255) NOT NULL UNIQUE,
+--     phone VARCHAR(20) NOT NULL,
+--     password VARCHAR(255) NOT NULL,
+--     photo_url VARCHAR(255)
+-- );
+-- 
+-- CREATE TABLE IF NOT EXISTS trips (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     departure_location VARCHAR(255) NOT NULL,
+--     arrival_location VARCHAR(255) NOT NULL,
+--     departure_date_time DATETIME NOT NULL,
+--     available_seats INT NOT NULL,
+--     car_model VARCHAR(255) NOT NULL,
+--     price DOUBLE NOT NULL,
+--     driver_id BIGINT NOT NULL,
+--     FOREIGN KEY (driver_id) REFERENCES users(id)
+-- );
+-- 
+-- CREATE TABLE IF NOT EXISTS reviews (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     comment TEXT NOT NULL,
+--     rating INT NOT NULL,
+--     created_at DATETIME NOT NULL,
+--     user_id BIGINT NOT NULL,
+--     reviewer_id BIGINT NOT NULL,
+--     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (reviewer_id) REFERENCES users(id)
+-- ); 

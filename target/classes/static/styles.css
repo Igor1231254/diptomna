@@ -1,0 +1,243 @@
+.navbar {
+    margin-bottom: 2rem;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-title {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.btn-success {
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+.form-control {
+    margin-bottom: 1rem;
+}
+
+.modal-content {
+    border-radius: 0.5rem;
+}
+
+.trip-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    position: relative;
+}
+
+.trip-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.trip-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.trip-status.no-seats {
+    background-color: #dc3545;
+    color: white;
+}
+
+#tripsList {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .btn-success {
+        margin-top: 1rem;
+    }
+}
+
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    animation: fadeInOut 3s ease-in-out;
+    text-align: center;
+    min-width: 300px;
+}
+
+.notification.success {
+    background-color: #28a745;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
+.notification.info {
+    background-color: #17a2b8;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    85% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+}
+
+.confirmation-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    min-width: 300px;
+    text-align: center;
+}
+
+.confirmation-dialog .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.confirmation-dialog button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.confirmation-dialog .confirm-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.confirmation-dialog .cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.profile-photo-container {
+    position: relative;
+    display: inline-block;
+}
+
+.photo-upload-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #007bff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.photo-upload-btn:hover {
+    background-color: #0056b3;
+}
+
+.photo-container {
+    position: relative;
+    display: inline-block;
+}
+
+.photo-delete-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.photo-container:hover .photo-delete-overlay {
+    display: flex;
+}
+
+.photo-delete-icon {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.driver-info {
+    border-left: 3px solid #007bff;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.driver-info:hover {
+    background-color: #e9ecef;
+}
+
+.driver-info h6 {
+    color: #007bff;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.driver-info p {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.driver-info strong {
+    color: #495057;
+} 
