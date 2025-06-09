@@ -44,8 +44,7 @@ public class UserService {
             user.setPhone(phone);
         }
         if (photo != null && !photo.isEmpty()) {
-            // TODO: Implement photo upload and storage
-            // user.setPhotoUrl(uploadedPhotoUrl);
+
         }
 
         return userRepository.save(user);
@@ -64,7 +63,6 @@ public class UserService {
     public User getDefaultUser() {
         List<User> users = userRepository.findAll();
         if (users.isEmpty()) {
-            // Create a default user if none exists
             return registerUser(
                 "Default User",
                 "default@example.com",
