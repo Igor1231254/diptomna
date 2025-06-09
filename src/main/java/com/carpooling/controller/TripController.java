@@ -31,7 +31,6 @@ public class TripController {
     @PostMapping("/search")
     public ResponseEntity<List<Trip>> searchTrips(@RequestBody SearchTripRequest request) {
         try {
-            // Якщо не вказана дата, і користувач не задав явно дані для пошуку, повертаємо пустий список
             if (request.getDepartureDateTime() == null && 
                 (request.getDepartureLocation() == null || request.getDepartureLocation().isEmpty() ||
                  request.getArrivalLocation() == null || request.getArrivalLocation().isEmpty())) {
@@ -52,12 +51,10 @@ public class TripController {
     @PostMapping
     public ResponseEntity<?> createTrip(@RequestBody CreateTripRequest request) {
         try {
-            // For testing, we'll use a default user (first one in DB) or create one if none exists
             User driver;
             try {
                 driver = userService.getDefaultUser();
             } catch (Exception e) {
-                // Create a default user if none exists
                 driver = userService.registerUser(
                     "Default User",
                     "default@example.com",
@@ -84,7 +81,6 @@ public class TripController {
     @PostMapping("/{tripId}/book")
     public ResponseEntity<?> bookTrip(@PathVariable Long tripId) {
         try {
-            // For testing, we'll use a default user
             User passenger = userService.getDefaultUser();
             tripService.bookTrip(tripId, passenger);
             return ResponseEntity.ok().build();
@@ -96,7 +92,6 @@ public class TripController {
     @GetMapping("/booked")
     public ResponseEntity<List<Trip>> getBookedTrips() {
         try {
-            // Для тестування використовуємо дефолтного користувача
             User user = userService.getDefaultUser();
             List<Trip> trips = tripService.getBookedTrips(user.getId());
             return ResponseEntity.ok(trips);
@@ -118,7 +113,6 @@ public class TripController {
     @PostMapping("/{tripId}/cancel")
     public ResponseEntity<?> cancelBooking(@PathVariable Long tripId) {
         try {
-            // Для тестування використовуємо дефолтного користувача
             User passenger = userService.getDefaultUser();
             tripService.cancelBooking(tripId, passenger);
             return ResponseEntity.ok().build();
