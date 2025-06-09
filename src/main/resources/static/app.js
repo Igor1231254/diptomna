@@ -1,35 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Перевірка автентифікації
-    //checkAuth();
 
-    // Показуємо інформаційне повідомлення замість завантаження всіх поїздок
     showWelcomeMessage();
 
-    // Обробка форми пошуку
     document.getElementById('searchForm').addEventListener('submit', function(e) {
         e.preventDefault();
         searchTrips();
     });
 
-    // Обробка форми створення поїздки
     document.getElementById('createTripForm').addEventListener('submit', function(e) {
         e.preventDefault();
         createTrip(e);
     });
 
-    // Обробка виходу
     document.getElementById('logoutLink').addEventListener('click', function(e) {
         e.preventDefault();
         logout();
     });
 
-    // Обробка переходу до профілю
     document.getElementById('profileLink').addEventListener('click', function(e) {
         e.preventDefault();
         window.location.href = '/profile.html';
     });
 
-    // Очищаємо список поїздок при завантаженні
     clearTripsList();
 });
 
@@ -61,16 +53,13 @@ async function getAllTrips() {
 async function searchTrips() {
     const form = document.getElementById('searchForm');
     
-    // Отримуємо значення з форми за допомогою атрибутів name
     const departureLocation = form.elements['departureLocation'].value;
     const arrivalLocation = form.elements['arrivalLocation'].value;
     const dateInput = form.elements['date'];
     
     let departureDateTime = null;
     
-    // Перевіряємо, чи заповнена дата
     if (dateInput.value) {
-        // Додаємо будь-який час (полудень), оскільки на сервері ми ігноруємо час
         departureDateTime = new Date(`${dateInput.value}T12:00:00`);
         console.log('Search date:', departureDateTime);
     }
@@ -118,7 +107,6 @@ function displayTrips(trips) {
         const tripElement = document.createElement('div');
         tripElement.className = 'trip-item';
         
-        // Додаємо статус, якщо немає вільних місць
         if (trip.availableSeats === 0) {
             const statusBadge = document.createElement('div');
             statusBadge.className = 'trip-status no-seats';
@@ -201,7 +189,6 @@ function createTrip(event) {
             form.reset();
             const modal = bootstrap.Modal.getInstance(document.getElementById('createTripModal'));
             modal.hide();
-            // Не оновлюємо список поїздок автоматично
             clearTripsList();
         } else {
             showNotification('Помилка при створенні поїздки', 'error');
