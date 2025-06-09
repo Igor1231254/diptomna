@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Завантаження даних профілю
     loadUserProfile();
     
-    // Завантаження поїздок користувача
     loadUserTrips();
     
-    // Обробка кліку на посилання "Вийти"
     document.getElementById('logoutLink').addEventListener('click', function(e) {
         e.preventDefault();
         logout();
@@ -16,18 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadUserProfile() {
     try {
-        // Отримуємо дані користувача з localStorage
         const userName = localStorage.getItem('userName');
         const userEmail = localStorage.getItem('userEmail');
         const userPhone = localStorage.getItem('userPhone');
 
         if (!userName || !userEmail) {
-            // Якщо даних немає, перенаправляємо на сторінку входу
             window.location.href = '/login.html';
             return;
         }
         
-        // Відображаємо дані користувача
         document.getElementById('userName').textContent = userName;
         document.getElementById('userEmail').textContent = userEmail;
         document.getElementById('userPhone').textContent = userPhone || '+380XXXXXXXXX';
@@ -39,14 +33,12 @@ async function loadUserProfile() {
 
 async function loadUserTrips() {
     try {
-        // Отримуємо всі створені поїздки
         const createdResponse = await fetch('/api/trips');
         if (createdResponse.ok) {
             const createdTrips = await createdResponse.json();
             displayCreatedTrips(createdTrips);
         }
         
-        // Отримуємо всі заброньовані поїздки
         const bookedResponse = await fetch('/api/trips/booked');
         if (bookedResponse.ok) {
             const bookedTrips = await bookedResponse.json();
@@ -147,24 +139,19 @@ function showNotification(message, type = 'info') {
 
 function showConfirmDialog(message, confirmButtonText = 'Видалити') {
     return new Promise((resolve) => {
-        // Створюємо overlay
         const overlay = document.createElement('div');
         overlay.className = 'confirmation-overlay';
         
-        // Створюємо діалогове вікно
         const dialog = document.createElement('div');
         dialog.className = 'confirmation-dialog';
         
-        // Додаємо повідомлення
         const messageElement = document.createElement('p');
         messageElement.textContent = message;
         dialog.appendChild(messageElement);
         
-        // Створюємо контейнер для кнопок
         const buttonsContainer = document.createElement('div');
         buttonsContainer.className = 'buttons';
         
-        // Кнопка підтвердження
         const confirmButton = document.createElement('button');
         confirmButton.className = 'confirm-btn';
         confirmButton.textContent = confirmButtonText;
@@ -173,7 +160,6 @@ function showConfirmDialog(message, confirmButtonText = 'Видалити') {
             resolve(true);
         };
         
-        // Кнопка відміни
         const cancelButton = document.createElement('button');
         cancelButton.className = 'cancel-btn';
         cancelButton.textContent = 'Відміна';
@@ -182,15 +168,12 @@ function showConfirmDialog(message, confirmButtonText = 'Видалити') {
             resolve(false);
         };
         
-        // Додаємо кнопки
         buttonsContainer.appendChild(cancelButton);
         buttonsContainer.appendChild(confirmButton);
         dialog.appendChild(buttonsContainer);
         
-        // Додаємо діалог до overlay
         overlay.appendChild(dialog);
         
-        // Додаємо overlay на сторінку
         document.body.appendChild(overlay);
     });
 }
@@ -238,7 +221,6 @@ async function cancelBooking(tripId) {
 }
 
 function logout() {
-    // Перенаправлення на головну сторінку
     window.location.href = '/';
 }
 
@@ -247,19 +229,15 @@ function setupPhotoUpload() {
     const userPhoto = document.getElementById('userPhoto');
     const deleteOverlay = document.getElementById('deletePhotoOverlay');
 
-    // Завантажуємо збережене фото при старті
     const savedPhoto = localStorage.getItem('userProfilePhoto');
     if (savedPhoto) {
         userPhoto.src = savedPhoto;
     }
 
-    // Обробник для видалення фото
     deleteOverlay.addEventListener('click', async function() {
         const confirmed = await showConfirmDialog('Ви впевнені, що хочете видалити фото профілю?', 'Видалити');
         if (confirmed) {
-            // Видаляємо фото з localStorage
             localStorage.removeItem('userProfilePhoto');
-            // Встановлюємо стандартне фото
             userPhoto.src = 'https://via.placeholder.com/150';
             showNotification('Фото профілю видалено', 'success');
         }
@@ -268,7 +246,7 @@ function setupPhotoUpload() {
     photoInput.addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
-            if (file.size > 5 * 1024 * 1024) { // 5MB максимальний розмір
+            if (file.size > 5 * 1024 * 1024) { 
                 showNotification('Розмір файлу не повинен перевищувати 5MB', 'error');
                 return;
             }
@@ -276,7 +254,6 @@ function setupPhotoUpload() {
             const reader = new FileReader();
             reader.onload = function(e) {
                 userPhoto.src = e.target.result;
-                // Зберігаємо фото в localStorage
                 localStorage.setItem('userProfilePhoto', e.target.result);
                 showNotification('Фото профілю успішно оновлено', 'success');
             };
