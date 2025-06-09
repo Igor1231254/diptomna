@@ -21,10 +21,8 @@ public class TripService {
 
     public List<Trip> searchTrips(String departureLocation, String arrivalLocation, LocalDateTime departureDateTime) {
         if (departureDateTime == null) {
-            // Якщо дата не вказана, шукаємо тільки за локаціями
             return tripRepository.findByDepartureLocationAndArrivalLocation(departureLocation, arrivalLocation);
         } else {
-            // Якщо дата вказана, шукаємо поїздки на цю дату (ігноруючи час)
             LocalDate searchDate = departureDateTime.toLocalDate();
             LocalDateTime startOfDay = searchDate.atStartOfDay();
             LocalDateTime endOfDay = searchDate.atTime(23, 59, 59);
@@ -58,10 +56,8 @@ public class TripService {
             throw new RuntimeException("No available seats");
         }
 
-        // Додаємо пасажира до списку
         trip.getPassengers().add(passenger);
         
-        // Зменшуємо кількість доступних місць
         trip.setAvailableSeats(trip.getAvailableSeats() - 1);
         return tripRepository.save(trip);
     }
@@ -81,8 +77,7 @@ public class TripService {
     }
 
     public List<Trip> getBookedTrips(Long userId) {
-        // Ми використовуємо спрощений підхід для демонстрації 
-        // В реальному додатку краще використовувати окремий репозиторій для бронювань
+
         return tripRepository.findAll().stream()
                .filter(trip -> trip.getPassengers().stream()
                     .anyMatch(user -> user.getId().equals(userId)))
@@ -93,14 +88,12 @@ public class TripService {
     public Trip cancelBooking(Long tripId, User passenger) {
         Trip trip = getTrip(tripId);
         
-        // Перевіряємо, чи є користувач серед пасажирів
         boolean removed = trip.getPassengers().removeIf(user -> user.getId().equals(passenger.getId()));
         
         if (!removed) {
             throw new RuntimeException("User is not a passenger of this trip");
         }
         
-        // Збільшуємо кількість доступних місць
         trip.setAvailableSeats(trip.getAvailableSeats() + 1);
         return tripRepository.save(trip);
     }
