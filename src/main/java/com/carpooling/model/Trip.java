@@ -45,7 +45,6 @@ public class Trip {
     )
     private List<User> passengers = new ArrayList<>();
     
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -118,7 +117,6 @@ public class Trip {
         this.passengers = passengers;
     }
     
-    // equals, hashCode and toString
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
