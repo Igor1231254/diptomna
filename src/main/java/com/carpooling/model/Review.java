@@ -31,7 +31,6 @@ public class Review {
     @JsonIgnoreProperties({"trips", "reviews", "password"})
     private User reviewer;
     
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -80,7 +79,6 @@ public class Review {
         this.reviewer = reviewer;
     }
     
-    // equals, hashCode and toString
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
