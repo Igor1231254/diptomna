@@ -40,7 +40,6 @@ public class User {
     @JsonIgnore
     private List<Trip> bookedTrips = new ArrayList<>();
     
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -113,7 +112,6 @@ public class User {
         this.bookedTrips = bookedTrips;
     }
     
-    // equals, hashCode and toString
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
